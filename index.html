@@ -1,334 +1,225 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Technovator - Innovation at the Frontier of Technology</title>
-    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-    <script src="https://unpkg.com/feather-icons"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
-    <style>
-        .particle {
-            position: absolute;
-            border-radius: 50%;
-            pointer-events: none;
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-        @keyframes gradient-x {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        @keyframes gradient-y {
-            0% { background-position: 50% 0%; }
-            50% { background-position: 50% 100%; }
-            100% { background-position: 50% 0%; }
-        }
-        .animate-gradient-x {
-            background-size: 200% 200%;
-            animation: gradient-x 15s ease infinite;
-        }
-        .animate-gradient-y {
-            background-size: 200% 200%;
-            animation: gradient-y 15s ease infinite;
-        }
-        .floating {
-            animation: float 6s ease-in-out infinite;
-        }
-        .text-gradient {
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Technovator - Innovation at the Frontier</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta/dist/vanta.net.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      color: #e5e7eb;
+    }
+    .glass {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 1rem;
+    }
+    .cursor {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #00f5ff;
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+      transition: transform 0.15s ease-out;
+    }
+    .magnetic:hover {
+      transform: scale(1.05);
+    }
+    #globeCanvas {
+      width: 400px;
+      height: 400px;
+      margin: 0 auto;
+    }
+  </style>
 </head>
-<body class="bg-gray-900 text-gray-100 overflow-x-hidden">
-    <div id="vanta-bg" class="fixed inset-0 z-0"></div>
-    
-    <!-- Navigation -->
-    <nav class="relative z-50 py-6 px-6 lg:px-12 flex justify-between items-center">
-        <div class="text-2xl font-bold gradient-text">TECHNOVATOR</div>
-        <div class="hidden md:flex space-x-8">
-            <a href="#about" class="hover:text-blue-400 transition">About</a>
-            <a href="#expertise" class="hover:text-green-400 transition">Expertise</a>
-            <a href="#projects" class="hover:text-red-400 transition">Projects</a>
-            <a href="#contact" class="hover:text-purple-400 transition">Contact</a>
+<body class="bg-black text-gray-200">
+
+  <!-- Background -->
+  <div id="vanta-bg" class="fixed top-0 left-0 w-full h-full -z-10"></div>
+  <div class="cursor"></div>
+
+  <!-- Hero Section -->
+  <section class="h-screen flex flex-col justify-center items-center text-center px-6 relative">
+    <h1 class="text-5xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 mb-6">
+      Welcome to Technovator
+    </h1>
+    <p class="text-xl md:text-2xl text-gray-300 max-w-2xl mb-8">
+      Exploring AI, Defense, and Innovation at the Frontier of Technology.
+    </p>
+    <div id="globeCanvas"></div>
+    <a href="#contact" class="magnetic mt-8 px-8 py-3 rounded-full bg-gradient-to-r from-purple-500 to-cyan-400 text-black font-semibold shadow-lg">
+      Get in Touch
+    </a>
+  </section>
+
+  <!-- About Section -->
+  <section class="py-20 px-6 max-w-6xl mx-auto">
+    <div class="glass p-10">
+      <h2 class="text-4xl font-bold mb-6 text-cyan-400">About Me</h2>
+      <p class="text-lg text-gray-300">
+        I am a technologist working at the intersection of AI, national security, and defense innovation. My journey
+        spans nuclear technology, data science, and strategic leadership — driven by a vision to merge deep tech with
+        real-world impact.
+      </p>
+    </div>
+  </section>
+
+  <!-- Expertise Section -->
+  <section class="py-20 px-6 max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
+    <div class="glass p-6 hover:scale-105 transform transition">
+      <h3 class="text-2xl font-semibold mb-4 text-purple-400">Artificial Intelligence</h3>
+      <p>Expertise in ML, CV, NLP, and Defense AI solutions for mission-critical applications.</p>
+    </div>
+    <div class="glass p-6 hover:scale-105 transform transition">
+      <h3 class="text-2xl font-semibold mb-4 text-cyan-400">Nuclear & Defense Tech</h3>
+      <p>Background in nuclear systems and defense strategy with practical implementation focus.</p>
+    </div>
+    <div class="glass p-6 hover:scale-105 transform transition">
+      <h3 class="text-2xl font-semibold mb-4 text-blue-400">Data Science</h3>
+      <p>Proficient in analytics, big data, and visualization for operational insights.</p>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section class="py-20 px-6 max-w-6xl mx-auto">
+    <h2 class="text-4xl font-bold mb-12 text-center text-cyan-400">Projects</h2>
+    <div class="grid md:grid-cols-3 gap-10">
+      <div class="glass p-6 hover:scale-105 transition">
+        <h3 class="text-2xl font-semibold mb-4">AI Drone Swarm Simulation</h3>
+        <p>A defense-focused AI system for swarm intelligence and battlefield simulation.</p>
+      </div>
+      <div class="glass p-6 hover:scale-105 transition">
+        <h3 class="text-2xl font-semibold mb-4">Neutron Collision Visualizer</h3>
+        <p>3D simulation of neutron-hydrogen collision for educational and research use.</p>
+      </div>
+      <div class="glass p-6 hover:scale-105 transition">
+        <h3 class="text-2xl font-semibold mb-4">Defense Analytics Platform</h3>
+        <p>Big Data system enabling predictive maintenance and mission readiness insights.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-20 px-6 max-w-3xl mx-auto">
+    <div class="glass p-10">
+      <h2 class="text-4xl font-bold mb-6 text-purple-400">Contact Me</h2>
+      <form class="space-y-6">
+        <div>
+          <label class="block text-sm mb-2">Name</label>
+          <input type="text" class="w-full p-3 rounded-lg bg-black/40 border border-gray-600 focus:border-cyan-400 outline-none">
         </div>
-        <button class="md:hidden">
-            <i data-feather="menu"></i>
+        <div>
+          <label class="block text-sm mb-2">Email</label>
+          <input type="email" class="w-full p-3 rounded-lg bg-black/40 border border-gray-600 focus:border-cyan-400 outline-none">
+        </div>
+        <div>
+          <label class="block text-sm mb-2">Message</label>
+          <textarea rows="4" class="w-full p-3 rounded-lg bg-black/40 border border-gray-600 focus:border-cyan-400 outline-none"></textarea>
+        </div>
+        <button type="submit" class="magnetic px-8 py-3 rounded-full bg-gradient-to-r from-cyan-400 to-purple-500 text-black font-semibold shadow-lg">
+          Send Message
         </button>
-    </nav>
+      </form>
+    </div>
+  </section>
 
-    <!-- Hero Section -->
-    <section class="relative z-10 min-h-screen flex items-center justify-center px-6 lg:px-12">
-        <div class="text-center max-w-4xl" data-aos="fade-up">
-            <h1 class="text-5xl md:text-7xl font-bold mb-6">
-                <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 animate-gradient-x">Powering the Future</span> with <span class="bg-clip-text text-transparent bg-gradient-to-r from-green-300 to-blue-400 animate-gradient-y">Intelligent Technology</span>
-            </h1>
-            <p class="text-xl md:text-2xl text-gray-300 mb-12 hovered-element" style="--hue: 0;">
-                Bridging AI innovation, clean nuclear energy, and data-driven solutions to create sustainable technological ecosystems.
-            </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#contact" class="px-8 py-3 bg-blue-600 hover:bg-blue-700 rounded-full font-medium transition transform hover:scale-105">
-                    Let's Collaborate
-                </a>
-                <a href="#projects" class="px-8 py-3 border border-gray-600 hover:bg-gray-800 rounded-full font-medium transition transform hover:scale-105">
-                    Explore Work
-                </a>
-            </div>
-        </div>
-        <div class="absolute bottom-20 left-1/2 transform -translate-x-1/2">
-            <i data-feather="chevron-down" class="animate-bounce w-10 h-10"></i>
-        </div>
-    </section>
+  <!-- Footer -->
+  <footer class="text-center py-6 text-gray-500">
+    © 2025 Technovator. All rights reserved.
+  </footer>
 
-    <!-- About Section -->
-    <section id="about" class="relative z-10 py-20 px-6 lg:px-12 bg-gray-800 bg-opacity-50 backdrop-blur-lg">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center" data-aos="fade-up">
-                <span class="text-white">About Me</span>
-            </h2>
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="relative" data-aos="fade-right">
-                    <div class="w-full h-96 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl overflow-hidden">
-                        <img src="http://static.photos/technology/640x360/42" alt="Technology Background" class="w-full h-full object-cover opacity-90">
-                    </div>
-                    <div class="absolute -bottom-6 -right-6 bg-gray-900 p-4 rounded-xl shadow-xl">
-                        <div class="flex items-center">
-                            <div class="w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-green-500 flex items-center justify-center">
-                                <i data-feather="cpu" class="w-8 h-8"></i>
-                            </div>
-                            <div class="ml-4">
-                                <h4 class="font-bold">20+ Years</h4>
-                                <p class="text-sm text-gray-400">Tech Experience</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div data-aos="fade-left">
-                    <h3 class="text-2xl font-bold mb-4">Innovator & Technology Strategist</h3>
-                    <p class="text-gray-300 mb-6">
-                        I specialize in creating synergistic solutions at the intersection of artificial intelligence, next-generation nuclear technology, and advanced data analytics. My work focuses on developing systems that are not only technologically advanced but also sustainable and scalable.
-                    </p>
-                    <p class="text-gray-300 mb-6">
-                        With a multidisciplinary approach, I bridge the gap between theoretical research and practical implementation, ensuring that cutting-edge innovations translate into real-world impact.
-                    </p>
-                    <div class="flex flex-wrap gap-4">
-                        <div class="flex items-center">
-                            <i data-feather="check-circle" class="text-green-400 mr-2"></i>
-                            <span>AI Architecture</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i data-feather="check-circle" class="text-green-400 mr-2"></i>
-                            <span>SMR Systems</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i data-feather="check-circle" class="text-green-400 mr-2"></i>
-                            <span>Data Science</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <script>
+    // Vanta Background
+    VANTA.NET({
+      el: "#vanta-bg",
+      mouseControls: true,
+      touchControls: true,
+      minHeight: 200.00,
+      minWidth: 200.00,
+      scale: 1.00,
+      scaleMobile: 1.00,
+      color: 0x00f5ff,
+      backgroundColor: 0x000000,
+      points: 12.00,
+      maxDistance: 25.00,
+      spacing: 18.00
+    });
 
-    <!-- Expertise Section -->
-    <section id="expertise" class="relative z-10 py-20 px-6 lg:px-12">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center" data-aos="fade-up">
-                <span class="text-white">Core Expertise</span>
-            </h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- AI Card -->
-                <div class="bg-gray-800 bg-opacity-50 backdrop-blur-lg rounded-xl p-8 hover:bg-opacity-70 transition" data-aos="fade-up" data-aos-delay="100">
-                    <div class="w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center mb-6">
-                        <i data-feather="activity" class="w-8 h-8"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Artificial Intelligence</h3>
-                    <p class="text-gray-300 mb-4">
-                        Designing intelligent systems that learn, adapt, and optimize processes across industries from healthcare to energy production.
-                    </p>
-                    <div class="mt-4">
-                        <span class="inline-block bg-blue-900 bg-opacity-50 rounded-full px-3 py-1 text-sm mr-2 mb-2">Neural Networks</span>
-                        <span class="inline-block bg-blue-900 bg-opacity-50 rounded-full px-3 py-1 text-sm mr-2 mb-2">Predictive Analytics</span>
-                        <span class="inline-block bg-blue-900 bg-opacity-50 rounded-full px-3 py-1 text-sm mr-2 mb-2">Computer Vision</span>
-                    </div>
-                </div>
-                
-                <!-- Nuclear Card -->
-                <div class="bg-gray-800 bg-opacity-50 backdrop-blur-lg rounded-xl p-8 hover:bg-opacity-70 transition" data-aos="fade-up" data-aos-delay="200">
-                    <div class="w-16 h-16 rounded-full bg-gradient-to-r from-green-500 to-teal-600 flex items-center justify-center mb-6">
-                        <i data-feather="zap" class="w-8 h-8"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Small Modular Reactors</h3>
-                    <p class="text-gray-300 mb-4">
-                        Developing next-generation nuclear solutions that are safer, scalable, and sustainable for the future of clean energy.
-                    </p>
-                    <div class="mt-4">
-                        <span class="inline-block bg-green-900 bg-opacity-50 rounded-full px-3 py-1 text-sm mr-2 mb-2">Reactor Design</span>
-                        <span class="inline-block bg-green-900 bg-opacity-50 rounded-full px-3 py-1 text-sm mr-2 mb-2">Safety Systems</span>
-                        <span class="inline-block bg-green-900 bg-opacity-50 rounded-full px-3 py-1 text-sm mr-2 mb-2">Energy Grids</span>
-                    </div>
-                </div>
-                
-                <!-- Data Science Card -->
-                <div class="bg-gray-800 bg-opacity-50 backdrop-blur-lg rounded-xl p-8 hover:bg-opacity-70 transition" data-aos="fade-up" data-aos-delay="300">
-                    <div class="w-16 h-16 rounded-full bg-gradient-to-r from-purple-500 to-pink-600 flex items-center justify-center mb-6">
-                        <i data-feather="database" class="w-8 h-8"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Data Science</h3>
-                    <p class="text-gray-300 mb-4">
-                        Transforming raw data into actionable insights through advanced analytics, machine learning, and visualization techniques.
-                    </p>
-                    <div class="mt-4">
-                        <span class="inline-block bg-purple-900 bg-opacity-50 rounded-full px-3 py-1 text-sm mr-2 mb-2">Big Data</span>
-                        <span class="inline-block bg-purple-900 bg-opacity-50 rounded-full px-3 py-1 text-sm mr-2 mb-2">Statistical Modeling</span>
-                        <span class="inline-block bg-purple-900 bg-opacity-50 rounded-full px-3 py-1 text-sm mr-2 mb-2">Data Visualization</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    // GSAP Animations
+    gsap.from("h1", { y: -50, opacity: 0, duration: 1 });
+    gsap.from("p", { y: 30, opacity: 0, delay: 0.5, duration: 1 });
+    gsap.utils.toArray(".glass").forEach((el) => {
+      gsap.from(el, {
+        scrollTrigger: { trigger: el, start: "top 80%" },
+        opacity: 0,
+        y: 50,
+        duration: 1
+      });
+    });
 
-    <!-- Projects Section -->
-    <section id="projects" class="relative z-10 py-20 px-6 lg:px-12 bg-gray-800 bg-opacity-50 backdrop-blur-lg">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center" data-aos="fade-up">
-                <span class="text-white">Featured Projects</span>
-            </h2>
-            
-            <div class="grid md:grid-cols-2 gap-8">
-                <!-- Project 1 -->
-                <div class="bg-gray-900 rounded-xl overflow-hidden shadow-xl transform transition hover:scale-[1.02]" data-aos="fade-up">
-                    <div class="relative h-64">
-                        <img src="http://static.photos/science/1024x576/7" alt="AI Nuclear Project" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
-                        <div class="absolute bottom-0 left-0 p-6">
-                            <span class="inline-block bg-blue-600 text-xs px-2 py-1 rounded-full mb-2">AI + Energy</span>
-                            <h3 class="text-xl font-bold">Neural Reactor Control</h3>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <p class="text-gray-300 mb-4">
-                            An AI-powered control system for small modular reactors that optimizes energy output while maintaining safety parameters in real-time.
-                        </p>
-                        <div class="flex items-center text-sm text-gray-400">
-                            <i data-feather="clock" class="w-4 h-4 mr-1"></i>
-                            <span>2023 - Present</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Project 2 -->
-                <div class="bg-gray-900 rounded-xl overflow-hidden shadow-xl transform transition hover:scale-[1.02]" data-aos="fade-up" data-aos-delay="100">
-                    <div class="relative h-64">
-                        <img src="http://static.photos/technology/1024x576/15" alt="Data Visualization" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
-                        <div class="absolute bottom-0 left-0 p-6">
-                            <span class="inline-block bg-purple-600 text-xs px-2 py-1 rounded-full mb-2">Data Science</span>
-                            <h3 class="text-xl font-bold">Energy Grid Analytics</h3>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <p class="text-gray-300 mb-4">
-                            A comprehensive data platform that visualizes and predicts energy consumption patterns across smart grids with 98% accuracy.
-                        </p>
-                        <div class="flex items-center text-sm text-gray-400">
-                            <i data-feather="clock" class="w-4 h-4 mr-1"></i>
-                            <span>2022 - 2023</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Project 3 -->
-                <div class="bg-gray-900 rounded-xl overflow-hidden shadow-xl transform transition hover:scale-[1.02]" data-aos="fade-up" data-aos-delay="200">
-                    <div class="relative h-64">
-                        <img src="http://static.photos/industry/1024x576/23" alt="Nuclear Facility" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
-                        <div class="absolute bottom-0 left-0 p-6">
-                            <span class="inline-block bg-green-600 text-xs px-2 py-1 rounded-full mb-2">SMR Design</span>
-                            <h3 class="text-xl font-bold">Modular Reactor Blueprint</h3>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <p class="text-gray-300 mb-4">
-                            A scalable reactor design that reduces construction costs by 40% while maintaining all safety standards for commercial deployment.
-                        </p>
-                        <div class="flex items-center text-sm text-gray-400">
-                            <i data-feather="clock" class="w-4 h-4 mr-1"></i>
-                            <span>2021 - 2022</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Project 4 -->
-                <div class="bg-gray-900 rounded-xl overflow-hidden shadow-xl transform transition hover:scale-[1.02]" data-aos="fade-up" data-aos-delay="300">
-                    <div class="relative h-64">
-                        <img src="http://static.photos/abstract/1024x576/9" alt="AI Interface" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
-                        <div class="absolute bottom-0 left-0 p-6">
-                            <span class="inline-block bg-red-600 text-xs px-2 py-1 rounded-full mb-2">AI Research</span>
-                            <h3 class="text-xl font-bold">Autonomous Safety Systems</h3>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <p class="text-gray-300 mb-4">
-                            Machine learning algorithms that can predict and prevent potential system failures in critical infrastructure with 99.9% reliability.
-                        </p>
-                        <div class="flex items-center text-sm text-gray-400">
-                            <i data-feather="clock" class="w-4 h-4 mr-1"></i>
-                            <span>2020 - 2021</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="text-center mt-12" data-aos="fade-up">
-                <a href="#" class="inline-flex items-center px-6 py-3 border border-gray-600 rounded-full font-medium hover:bg-gray-700 transition">
-                    View All Projects
-                    <i data-feather="arrow-right" class="w-4 h-4 ml-2"></i>
-                </a>
-            </div>
-        </div>
-    </section>
+    // Custom Cursor
+    const cursor = document.querySelector(".cursor");
+    document.addEventListener("mousemove", (e) => {
+      cursor.style.left = e.pageX + "px";
+      cursor.style.top = e.pageY + "px";
+    });
 
-    <!-- Contact Section -->
-    <section id="contact" class="relative z-10 py-20 px-6 lg:px-12">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center" data-aos="fade-up">
-                <span class="text-white">Let's Build the Future</span>
-            </h2>
-            
-            <div class="grid md:grid-cols-2 gap-12">
-                <div data-aos="fade-right">
-                    <h3 class="text-2xl font-bold mb-6">Get In Touch</h3>
-                    <p class="text-gray-300 mb-8">
-                        Whether you're interested in collaborating on a project, need consulting services, or just want to discuss the future of technology, I'd love to hear from you.
-                    </p>
-                    
-                    <div class="space-y-6">
-                        <div class="flex items-start">
-                            <div class="bg-blue-900 bg-opacity-50 p-3 rounded-lg mr-4">
-                                <i data-feather="mail" class="w-5 h-5"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold">Email</h4>
-                                <a href="mailto:ssarswat@gmail.com" class="text-blue-400 hover:underline">ssarswat@gmail.com</a>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start">
-                            <div class="bg-green-900 bg-opacity-50 p-3 rounded-lg mr-4">
-                                <i data-feather="phone" class="w-5 h-5"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold">Phone</h4>
-                                <a href="tel:+919757026776" class="text-green-400 hover:underline">
+    // Rotating Glowing Globe (with mouse interaction)
+    const globeCanvas = document.getElementById("globeCanvas");
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setSize(400, 400);
+    globeCanvas.appendChild(renderer.domElement);
+
+    const geometry = new THREE.SphereGeometry(5, 64, 64);
+    const material = new THREE.MeshPhongMaterial({
+      color: 0x00f5ff,
+      emissive: 0x0077ff,
+      shininess: 80,
+      transparent: true,
+      opacity: 0.9,
+      wireframe: true
+    });
+    const sphere = new THREE.Mesh(geometry, material);
+    scene.add(sphere);
+
+    const light = new THREE.PointLight(0xffffff, 1.2, 100);
+    light.position.set(10, 10, 10);
+    scene.add(light);
+
+    camera.position.z = 15;
+
+    let targetX = 0;
+    let targetY = 0;
+
+    document.addEventListener("mousemove", (e) => {
+      const rect = globeCanvas.getBoundingClientRect();
+      const mouseX = (e.clientX - rect.left) / rect.width * 2 - 1;
+      const mouseY = -((e.clientY - rect.top) / rect.height * 2 - 1);
+      targetX = mouseX * 0.5;
+      targetY = mouseY * 0.5;
+    });
+
+    function animate() {
+      requestAnimationFrame(animate);
+      // Smooth rotation
+      sphere.rotation.y += 0.0025 + (targetX - sphere.rotation.y) * 0.05;
+      sphere.rotation.x += 0.0015 + (targetY - sphere.rotation.x) * 0.05;
+      renderer.render(scene, camera);
+    }
+    animate();
+  </script>
+</body>
+</html>
