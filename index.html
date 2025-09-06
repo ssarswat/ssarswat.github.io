@@ -1,149 +1,256 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Technovator - Innovation at the Frontier of Technology</title>
-  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
-
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- AOS Animations -->
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
-  <!-- Feather Icons -->
-  <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-
-  <!-- Three.js & Vanta.js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
-
-  <style>
-    /* Gradient Animations */
-    @keyframes gradient-x {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    @keyframes gradient-y {
-      0% { background-position: 50% 0%; }
-      50% { background-position: 50% 100%; }
-      100% { background-position: 50% 0%; }
-    }
-    .animate-gradient-x {
-      background-size: 200% 200%;
-      animation: gradient-x 20s ease infinite;
-    }
-    .animate-gradient-y {
-      background-size: 200% 200%;
-      animation: gradient-y 25s ease infinite;
-    }
-
-    /* Floating Elements */
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-20px); }
-    }
-    .floating {
-      animation: float 6s ease-in-out infinite;
-    }
-
-    /* Gradient Text */
-    .text-gradient {
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    /* Button Glow */
-    .glow-button {
-      position: relative;
-      z-index: 0;
-      transition: all 0.3s ease;
-    }
-    .glow-button::before {
-      content: '';
-      position: absolute;
-      top: -2px; left: -2px; right: -2px; bottom: -2px;
-      background: linear-gradient(45deg, #00ffff, #ff00ff, #00ff00, #ff0000);
-      background-size: 400% 400%;
-      filter: blur(10px);
-      z-index: -1;
-      border-radius: 9999px;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      animation: gradient-x 10s linear infinite;
-    }
-    .glow-button:hover::before {
-      opacity: 1;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technovator - Innovation at the Frontier of Technology</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <style>
+        .particle { position: absolute; border-radius: 50%; pointer-events: none; }
+        @keyframes float { 0%,100%{transform:translateY(0);}50%{transform:translateY(-20px);} }
+        @keyframes gradient-x { 0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;} }
+        @keyframes gradient-y { 0%{background-position:50% 0%;}50%{background-position:50% 100%;}100%{background-position:50% 0%;} }
+        .animate-gradient-x { background-size:200% 200%; animation: gradient-x 15s ease infinite; }
+        .animate-gradient-y { background-size:200% 200%; animation: gradient-y 15s ease infinite; }
+        .floating { animation: float 6s ease-in-out infinite; }
+        .text-gradient { background-clip: text; -webkit-background-clip: text; color: transparent; }
+    </style>
 </head>
 <body class="bg-gray-900 text-gray-100 overflow-x-hidden">
 
-  <!-- Vanta Background -->
-  <div id="vanta-bg" class="fixed inset-0 z-0"></div>
+<div id="vanta-bg" class="fixed inset-0 z-0"></div>
 
-  <!-- Navigation -->
-  <nav class="relative z-50 py-6 px-6 lg:px-12 flex justify-between items-center">
-    <div class="text-2xl font-bold text-gradient">TECHNOVATOR</div>
+<!-- Navigation -->
+<nav class="relative z-50 py-6 px-6 lg:px-12 flex justify-between items-center">
+    <div class="text-2xl font-bold gradient-text">TECHNOVATOR</div>
     <div class="hidden md:flex space-x-8">
-      <a href="#about" class="hover:text-blue-400 transition">About</a>
-      <a href="#expertise" class="hover:text-green-400 transition">Expertise</a>
-      <a href="#projects" class="hover:text-red-400 transition">Projects</a>
-      <a href="#contact" class="hover:text-purple-400 transition">Contact</a>
+        <a href="#about" class="hover:text-blue-400 transition">About</a>
+        <a href="#expertise" class="hover:text-green-400 transition">Expertise</a>
+        <a href="#projects" class="hover:text-red-400 transition">Projects</a>
+        <a href="#contact" class="hover:text-purple-400 transition">Contact</a>
     </div>
     <button class="md:hidden">
-      <i data-feather="menu"></i>
+        <i data-feather="menu"></i>
     </button>
-  </nav>
+</nav>
 
-  <!-- Hero Section -->
-  <section class="relative z-10 min-h-screen flex items-center justify-center px-6 lg:px-12">
+<!-- Hero Section -->
+<section class="relative z-10 min-h-screen flex items-center justify-center px-6 lg:px-12">
     <div class="text-center max-w-4xl" data-aos="fade-up">
-      <h1 class="text-5xl md:text-7xl font-bold mb-6">
-        <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 animate-gradient-x">Powering the Future</span> 
-        with 
-        <span class="bg-clip-text text-transparent bg-gradient-to-r from-green-300 to-blue-400 animate-gradient-y">Intelligent Technology</span>
-      </h1>
-      <p class="text-xl md:text-2xl text-gray-300 mb-12">
-        Bridging AI innovation, clean nuclear energy, and data-driven solutions to create sustainable technological ecosystems.
-      </p>
-      <div class="flex flex-col sm:flex-row justify-center gap-4">
-        <a href="#contact" class="glow-button px-8 py-3 rounded-full font-medium hover:scale-105 transition transform">
-          Let's Collaborate
-        </a>
-        <a href="#projects" class="glow-button px-8 py-3 rounded-full font-medium hover:scale-105 transition transform">
-          Explore Work
-        </a>
-      </div>
+        <h1 class="text-5xl md:text-7xl font-bold mb-6">
+            <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 animate-gradient-x">Powering the Future</span> with <span class="bg-clip-text text-transparent bg-gradient-to-r from-green-300 to-blue-400 animate-gradient-y">Intelligent Technology</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-300 mb-12">
+            Bridging AI innovation, clean nuclear energy, and data-driven solutions to create sustainable technological ecosystems.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="#contact" class="px-8 py-3 bg-blue-600 hover:bg-blue-700 rounded-full font-medium transition transform hover:scale-105">Let's Collaborate</a>
+            <a href="#projects" class="px-8 py-3 border border-gray-600 hover:bg-gray-800 rounded-full font-medium transition transform hover:scale-105">Explore Work</a>
+        </div>
     </div>
     <div class="absolute bottom-20 left-1/2 transform -translate-x-1/2">
-      <i data-feather="chevron-down" class="animate-bounce w-10 h-10"></i>
+        <i data-feather="chevron-down" class="animate-bounce w-10 h-10"></i>
     </div>
-  </section>
+</section>
 
-  <!-- About, Expertise, Projects, Contact Sections ... Keep your previous content here ... -->
+<!-- About Section -->
+<section id="about" class="relative z-10 py-20 px-6 lg:px-12 bg-gray-800 bg-opacity-50 backdrop-blur-lg">
+    <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center" data-aos="fade-up"><span class="text-white">About Me</span></h2>
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="relative" data-aos="fade-right">
+                <div class="w-full h-96 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl overflow-hidden">
+                    <img src="https://via.placeholder.com/640x360.png?text=Technology" alt="Technology Background" class="w-full h-full object-cover opacity-90">
+                </div>
+                <div class="absolute -bottom-6 -right-6 bg-gray-900 p-4 rounded-xl shadow-xl">
+                    <div class="flex items-center">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-green-500 flex items-center justify-center">
+                            <i data-feather="cpu" class="w-8 h-8"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-bold">20+ Years</h4>
+                            <p class="text-sm text-gray-400">Tech Experience</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div data-aos="fade-left">
+                <h3 class="text-2xl font-bold mb-4">Innovator & Technology Strategist</h3>
+                <p class="text-gray-300 mb-6">
+                    I specialize in creating synergistic solutions at the intersection of artificial intelligence, next-generation nuclear technology, and advanced data analytics. My work focuses on developing systems that are technologically advanced, sustainable, and scalable.
+                </p>
+                <p class="text-gray-300 mb-6">
+                    Using a multidisciplinary approach, I bridge the gap between research and practical implementation, ensuring innovations translate into tangible real-world impact.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <div class="flex items-center"><i data-feather="check-circle" class="text-green-400 mr-2"></i><span>AI Architecture</span></div>
+                    <div class="flex items-center"><i data-feather="check-circle" class="text-green-400 mr-2"></i><span>SMR Systems</span></div>
+                    <div class="flex items-center"><i data-feather="check-circle" class="text-green-400 mr-2"></i><span>Data Science</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-  <!-- Scripts -->
-  <script>
-    feather.replace(); // Feather icons
-    AOS.init({ duration: 1000 }); // Scroll animations
+<!-- Expertise Section -->
+<section id="expertise" class="relative z-10 py-20 px-6 lg:px-12">
+    <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center" data-aos="fade-up"><span class="text-white">Core Expertise</span></h2>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-gray-800 bg-opacity-50 backdrop-blur-lg rounded-xl p-8 hover:bg-opacity-70 transition" data-aos="fade-up" data-aos-delay="100">
+                <div class="w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center mb-6">
+                    <i data-feather="activity" class="w-8 h-8"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">Artificial Intelligence</h3>
+                <p class="text-gray-300 mb-4">Designing intelligent systems that learn, adapt, and optimize processes across industries from healthcare to energy production.</p>
+                <div class="mt-4">
+                    <span class="inline-block bg-blue-900 bg-opacity-50 rounded-full px-3 py-1 text-sm mr-2 mb-2">Neural Networks</span>
+                    <span class="inline-block bg-blue-900 bg-opacity-50 rounded-full px-3 py-1 text-sm mr-2 mb-2">Predictive Analytics</span>
+                    <span class="inline-block bg-blue-900 bg-opacity-50 rounded-full px-3 py-1 text-sm mr-2 mb-2">Computer Vision</span>
+                </div>
+            </div>
+            <div class="bg-gray-800 bg-opacity-50 backdrop-blur-lg rounded-xl p-8 hover:bg-opacity-70 transition" data-aos="fade-up" data-aos-delay="200">
+                <div class="w-16 h-16 rounded-full bg-gradient-to-r from-green-500 to-teal-600 flex items-center justify-center mb-6">
+                    <i data-feather="zap" class="w-8 h-8"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">Small Modular Reactors</h3>
+                <p class="text-gray-300 mb-4">Developing next-generation nuclear solutions that are safer, scalable, and sustainable for the future of clean energy.</p>
+                <div class="mt-4">
+                    <span class="inline-block bg-green-900 bg-opacity-50 rounded-full px-3 py-1 text-sm mr-2 mb-2">Reactor Design</span>
+                    <span class="inline-block bg-green-900 bg-opacity-50 rounded-full px-3 py-1 text-sm mr-2 mb-2">Safety Systems</span>
+                    <span class="inline-block bg-green-900 bg-opacity-50 rounded-full px-3 py-1 text-sm mr-2 mb-2">Energy Grids</span>
+                </div>
+            </div>
+            <div class="bg-gray-800 bg-opacity-50 backdrop-blur-lg rounded-xl p-8 hover:bg-opacity-70 transition" data-aos="fade-up" data-aos-delay="300">
+                <div class="w-16 h-16 rounded-full bg-gradient-to-r from-purple-500 to-pink-600 flex items-center justify-center mb-6">
+                    <i data-feather="database" class="w-8 h-8"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">Data Science</h3>
+                <p class="text-gray-300 mb-4">Transforming raw data into actionable insights through advanced analytics, machine learning, and visualization techniques.</p>
+                <div class="mt-4">
+                    <span class="inline-block bg-purple-900 bg-opacity-50 rounded-full px-3 py-1 text-sm mr-2 mb-2">Big Data</span>
+                    <span class="inline-block bg-purple-900 bg-opacity-50 rounded-full px-3 py-1 text-sm mr-2 mb-2">Statistical Modeling</span>
+                    <span class="inline-block bg-purple-900 bg-opacity-50 rounded-full px-3 py-1 text-sm mr-2 mb-2">Data Visualization</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-    // Vanta.js interactive background
-    VANTA.NET({
-      el: "#vanta-bg",
-      mouseControls: true,
-      touchControls: true,
-      minHeight: 200.00,
-      minWidth: 200.00,
-      scale: 1.0,
-      scaleMobile: 1.0,
-      color: 0x00ffff,
-      backgroundColor: 0x1a1a1a
+<!-- Projects Section -->
+<section id="projects" class="relative z-10 py-20 px-6 lg:px-12 bg-gray-800 bg-opacity-50 backdrop-blur-lg">
+    <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center" data-aos="fade-up"><span class="text-white">Selected Projects</span></h2>
+        <div class="grid md:grid-cols-2 gap-12">
+            <!-- Project Cards Placeholder -->
+            <div class="bg-gray-900 bg-opacity-70 rounded-xl overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="100">
+                <img src="https://via.placeholder.com/640x360.png?text=AI+Project" alt="AI Project" class="w-full h-56 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-3">AI-Powered Predictive Analytics</h3>
+                    <p class="text-gray-300 mb-4">
+                        Developed a predictive analytics system using deep learning to forecast industrial energy demand, optimizing production and reducing waste.
+                    </p>
+                    <a href="#contact" class="text-blue-400 hover:underline">Collaborate &rarr;</a>
+                </div>
+            </div>
+            <div class="bg-gray-900 bg-opacity-70 rounded-xl overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="200">
+                <img src="https://via.placeholder.com/640x360.png?text=SMR+Project" alt="SMR Project" class="w-full h-56 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-3">Small Modular Reactor Prototype</h3>
+                    <p class="text-gray-300 mb-4">
+                        Led the design and simulation of a next-generation SMR with enhanced safety features and modular scalability for clean energy deployment.
+                    </p>
+                    <a href="#contact" class="text-blue-400 hover:underline">Collaborate &rarr;</a>
+                </div>
+            </div>
+            <div class="bg-gray-900 bg-opacity-70 rounded-xl overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="300">
+                <img src="https://via.placeholder.com/640x360.png?text=Data+Science+Project" alt="Data Science Project" class="w-full h-56 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-3">Big Data Optimization Platform</h3>
+                    <p class="text-gray-300 mb-4">
+                        Implemented an advanced data analytics platform to process large-scale industrial datasets, improving operational efficiency by 30%.
+                    </p>
+                    <a href="#contact" class="text-blue-400 hover:underline">Collaborate &rarr;</a>
+                </div>
+            </div>
+            <div class="bg-gray-900 bg-opacity-70 rounded-xl overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="400">
+                <img src="https://via.placeholder.com/640x360.png?text=IoT+Integration" alt="IoT Integration Project" class="w-full h-56 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-3">IoT & AI Integrated Systems</h3>
+                    <p class="text-gray-300 mb-4">
+                        Developed IoT-integrated smart devices leveraging AI for real-time monitoring and predictive maintenance in industrial operations.
+                    </p>
+                    <a href="#contact" class="text-blue-400 hover:underline">Collaborate &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="relative z-10 py-20 px-6 lg:px-12">
+    <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-12" data-aos="fade-up"><span class="text-white">Get In Touch</span></h2>
+        <p class="text-gray-300 mb-8" data-aos="fade-up" data-aos-delay="100">
+            I welcome opportunities for collaboration, consultation, and speaking engagements. Please reach out using the form below.
+        </p>
+        <form action="#" method="POST" class="space-y-6" data-aos="fade-up" data-aos-delay="200">
+            <input type="text" name="name" placeholder="Your Name" class="w-full px-6 py-3 rounded-xl bg-gray-800 bg-opacity-50 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <input type="email" name="email" placeholder="Your Email" class="w-full px-6 py-3 rounded-xl bg-gray-800 bg-opacity-50 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <textarea name="message" rows="6" placeholder="Your Message" class="w-full px-6 py-3 rounded-xl bg-gray-800 bg-opacity-50 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+            <button type="submit" class="px-8 py-3 bg-blue-600 hover:bg-blue-700 rounded-full font-medium transition transform hover:scale-105">Send Message</button>
+        </form>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="relative z-10 bg-gray-900 bg-opacity-80 py-12 px-6 lg:px-12 text-center">
+    <p class="text-gray-400 mb-4">&copy; 2025 Technovator. All rights reserved.</p>
+    <div class="flex justify-center space-x-6">
+        <a href="#" class="text-gray-400 hover:text-white"><i data-feather="linkedin" class="w-5 h-5"></i></a>
+        <a href="#" class="text-gray-400 hover:text-white"><i data-feather="github" class="w-5 h-5"></i></a>
+        <a href="#" class="text-gray-400 hover:text-white"><i data-feather="twitter" class="w-5 h-5"></i></a>
+    </div>
+</footer>
+
+<script>
+    // Feather icons
+    feather.replace();
+
+    // AOS animation init
+    AOS.init({
+        duration: 1200,
+        once: true
     });
-  </script>
+
+    // VANTA background
+    VANTA.NET({
+        el: "#vanta-bg",
+        mouseControls: true,
+        touchControls: true,
+        minHeight: 200.00,
+        minWidth: 200.00,
+        scale: 1.00,
+        scaleMobile: 1.00,
+        color: 0x1e90ff,
+        backgroundColor: 0x111111
+    });
+
+    // Simple mobile menu toggle
+    const btn = document.querySelector("nav button");
+    const navLinks = document.querySelector("nav div.hidden");
+    btn.addEventListener("click", () => {
+        navLinks.classList.toggle("hidden");
+    });
+</script>
+
 </body>
 </html>
+
